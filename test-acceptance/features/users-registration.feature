@@ -217,3 +217,22 @@ Scenario: Administrator wants to edit a User information without password
     And I click "Atualizar"
     Then I get a Error message "Por favor colocar um dado válido"
     And I see the "Nome" field highlighted
+
+Scenario: Administrator wants to edit a user role
+    Given I am logged in with an "admin" account with email "admin@dizer.com" and password "admin"
+    And I'm on the "Lista de Usuários" page
+    And I see a list of system users
+    And I see the "Usuario" user "pcsb"
+    And I see the "email" user "pcsb@cin.ufpe.br"
+    And I see the "Nome" user "Pedro Basilio"
+    And I see the "Cargo" user "Usuario"
+    And I see the "Ativo" user field checked
+    When I click on the "Ativar" button on the "Usuario" user "pcsb" line
+    And I select the "Admin" option of "Cargo" field
+    Then I see a success message "Informação alterada com sucesso!"
+    And I see a list of system users
+    And I see the "Usuario" user "pcsb"
+    And I see the "email" user "pcsb2@cin.ufpe.br"
+    And I see the "Nome" user "Pedro Costa"
+    And I see the "Cargo" user "Admin"
+    And I see the "Ativo" user field checked
