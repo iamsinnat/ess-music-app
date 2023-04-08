@@ -135,3 +135,85 @@ Scenario: Administrator wants to edit a User from the system
     And I see the "Nome" user "Pedro Costa"
     And I see the "Cargo" user "Usuario"
     And I see the "Ativo" user field checked
+
+Scenario: Administrator wants to edit a User password to a password less than 6 digits
+    Given I am logged in with an "admin" account with email "admin@dizer.com" and password "admin"
+    And I'm on the "Lista de Usuários" page
+    And I see a list of system users
+    And I see the "Usuario" user "pcsb"
+    And I see the "email" user "pcsb@cin.ufpe.br"
+    And I see the "Nome" user "Pedro Basilio"
+    And I see the "Cargo" user "Usuario"
+    And I see the "Ativo" user field checked
+    When I click on the "Editar" button on the "Usuario" user "pcsb" line
+    And I write "Pedro Costa" at "Nome" field
+    And I write "pcsb0" at "Senha" field
+    And I write "pcsb2@cin.ufpe.br" at "Email" field
+    And I click "Atualizar"
+    Then I get a Error message "Por favor colocar um dado válido"
+    And I see the "Senha" field highlighted
+
+Scenario: Administrator wants to edit a User email to a invalid email
+    Given I am logged in with an "admin" account with email "admin@dizer.com" and password "admin"
+    And I'm on the "Lista de Usuários" page
+    And I see a list of system users
+    And I see the "Usuario" user "pcsb"
+    And I see the "email" user "pcsb@cin.ufpe.br"
+    And I see the "Nome" user "Pedro Basilio"
+    And I see the "Cargo" user "Usuario"
+    And I see the "Ativo" user field checked
+    When I click on the "Editar" button on the "Usuario" user "pcsb" line
+    And I write "Pedro Costa" at "Nome" field
+    And I write "pcsb01" at "Senha" field
+    And I write "pcsb2" at "Email" field
+    And I click "Atualizar"
+    Then I get a Error message "Por favor colocar um dado válido"
+    And I see the "Email" field highlighted
+
+Scenario: Administrator wants to edit a User information without email
+    Given I am logged in with an "admin" account with email "admin@dizer.com" and password "admin"
+    And I'm on the "Lista de Usuários" page
+    And I see a list of system users
+    And I see the "Usuario" user "pcsb"
+    And I see the "email" user "pcsb@cin.ufpe.br"
+    And I see the "Nome" user "Pedro Basilio"
+    And I see the "Cargo" user "Usuario"
+    And I see the "Ativo" user field checked
+    When I click on the "Editar" button on the "Usuario" user "pcsb" line
+    And I write "Pedro Costa" at "Nome" field
+    And I write "pcsb01" at "Senha" field
+    And I click "Atualizar"
+    Then I get a Error message "Por favor colocar um dado válido"
+    And I see the "Email" field highlighted
+
+Scenario: Administrator wants to edit a User information without password
+    Given I am logged in with an "admin" account with email "admin@dizer.com" and password "admin"
+    And I'm on the "Lista de Usuários" page
+    And I see a list of system users
+    And I see the "Usuario" user "pcsb"
+    And I see the "email" user "pcsb@cin.ufpe.br"
+    And I see the "Nome" user "Pedro Basilio"
+    And I see the "Cargo" user "Usuario"
+    And I see the "Ativo" user field checked
+    When I click on the "Editar" button on the "Usuario" user "pcsb" line
+    And I write "Pedro Costa" at "Nome" field
+    And I write "pcsb2@cin.ufpe.br" at "Email" field
+    And I click "Atualizar"
+    Then I get a Error message "Por favor colocar um dado válido"
+    And I see the "Senha" field highlighted
+
+    Scenario: Administrator wants to edit a User information without name
+    Given I am logged in with an "admin" account with email "admin@dizer.com" and password "admin"
+    And I'm on the "Lista de Usuários" page
+    And I see a list of system users
+    And I see the "Usuario" user "pcsb"
+    And I see the "email" user "pcsb@cin.ufpe.br"
+    And I see the "Nome" user "Pedro Basilio"
+    And I see the "Cargo" user "Usuario"
+    And I see the "Ativo" user field checked
+    When I click on the "Editar" button on the "Usuario" user "pcsb" line
+    And I write "pcsb01" at "Senha" field
+    And I write "pcsb2@cin.ufpe.br" at "Email" field
+    And I click "Atualizar"
+    Then I get a Error message "Por favor colocar um dado válido"
+    And I see the "Nome" field highlighted
