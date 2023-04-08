@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import getJsonDatabase from '../utils/jsonDatabase'
 import jwt = require('jsonwebtoken');
 import { JwtPayload } from 'jsonwebtoken'
 

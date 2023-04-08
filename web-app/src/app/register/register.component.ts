@@ -27,7 +27,7 @@ export class RegisterComponent {
     const email = (document.querySelector('#email') as HTMLInputElement).value;
     const password = (document.querySelector('#password') as HTMLInputElement).value;
 
-    const response = await fetch('http://localhost:3000/api/user', {
+    const response = await fetch('http://localhost:3000/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

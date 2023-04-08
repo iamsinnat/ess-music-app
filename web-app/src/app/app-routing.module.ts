@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'lista-usuarios', component: UserlistingComponent, /*canActivate:[AuthGuard]*/ },
   { path: 'cadastrar-musicas', component: MusicasComponent, /*canActivate:[AuthGuard]*/ },
   { path: 'lista-musicas', component: ListaMusicasComponent, /*canActivate:[AuthGuard]*/ },
-  { path: 'initial-page', component: InitialPageComponent, /*canActivate:[AuthGuard]*/ },
+  { path: 'initial-page', component: InitialPageComponent, canActivate: [AuthGuard] },
   { path: 'userAdmin', component: UserAdminComponent, /*canActivate:[AuthGuard]*/ },
   { path: 'user', component: UserComponent, /*canActivate:[AuthGuard]*/ },
   { path: 'artista', component: ArtistaComponent, /*canActivate:[AuthGuard]*/ },
