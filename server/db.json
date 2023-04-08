@@ -1,1 +1,1 @@
-{"users":[],"songs":[],"playlists":[],"categories":[],"playlistCategories":[],"playlistSongs":[],"userFollowPlaylists":[],"userSongHistories":[],"writing":false,"dbFilePath":"db.json"}
+{"users":[{"email":"ooo@ooo.com","nome":"ooo","senha":"$2b$10$qBQOY7ebzkN6TkrNcMh..O2RKR9FCO08b7/FzjuxJmvzPtI3TMHXa"}],"songs":[],"playlists":[],"categories":[],"playlistCategories":[],"playlistSongs":[],"userFollowPlaylists":[],"userSongHistories":[],"writing":true,"dbFilePath":"db.json"}
