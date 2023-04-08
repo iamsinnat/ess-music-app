@@ -1,13 +1,12 @@
 import { Router } from 'express'
 const router: Router = Router()
 
-import getJsonDatabase from './utils/jsonDatabase'
+//import getJsonDatabase from './utils/jsonDatabase'
 import { hashPassword, comparePasswords } from './utils/bcryptUtils'
 
 import { logout } from './controllers/logout';
-import { loginUser } from './controllers/loginUser';
-import { registerUser } from './controllers/registerUser';
-import { registerAdmin } from './controllers/registerAdmin';
+import { login } from './controllers/login';
+import { register } from './controllers/register';
 
 import { dashboardRoute } from './views/dashboard';
 import { authenticationMiddleware } from './middlewares/authenticationMw'
@@ -32,13 +31,11 @@ interface JwtClaims {
 }
 
 
-router.post('/user', registerUser)
+router.post('/register', register)
 
-router.post('/login', loginUser)
+router.post('/login', login)
 
 router.get('/dashboardUser', authenticationMiddleware, dashboardRoute)
-
-router.post('/registerAdmin', registerAdmin)
 
 router.get('/dashboardAdmin', authenticationMiddleware, authorizationMiddleware, dashboardRoute)
 

@@ -16,14 +16,10 @@ export class RegisterComponent {
 
   }
 
-  registerform=this.builder.group({
-    id:this.builder.control('', Validators.required),
-    name:this.builder.control('', Validators.required),
-    password:this.builder.control('', Validators.compose([Validators.required, Validators.minLength(6)])),
-    email:this.builder.control('', Validators.compose([Validators.required, Validators.email])),
-    gender:this.builder.control(''),
-    role:this.builder.control(''),
-    isactive:this.builder.control(true)
+  registerform = this.builder.group({
+    name: this.builder.control('', Validators.required),
+    email: this.builder.control('', Validators.compose([Validators.required, Validators.email])),
+    password: this.builder.control('', Validators.compose([Validators.required, Validators.minLength(6)]))
   });
 
   async proceedregistration() {
@@ -31,7 +27,7 @@ export class RegisterComponent {
     const email = (document.querySelector('#email') as HTMLInputElement).value;
     const password = (document.querySelector('#password') as HTMLInputElement).value;
 
-    const response = await fetch('http://localhost:3000/api/registerUser', {
+    const response = await fetch('http://localhost:3000/api/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -42,6 +38,7 @@ export class RegisterComponent {
     if (response.ok) {
       const result = await response.text();
       console.log(result);
+      this.router.navigate(['login'])
     } else {
       const error = await response.text();
       console.log(error);

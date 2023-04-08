@@ -1,14 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt = require('jsonwebtoken');
 import { JwtPayload } from 'jsonwebtoken'
-import getJsonDatabase from '../utils/jsonDatabase';
+//import getJsonDatabase from '../utils/jsonDatabase';
+import { context } from '../../server';
 
 interface User {
-    id: string
-    role: string
-    name: string
+    nome: string
     email: string
-    password: string
+    senha: string
 }
 
 declare global {
@@ -32,22 +31,17 @@ export function authenticationMiddleware(req: Request, res: Response, next: Next
             return res.status(401).send('Usuário não autenticado.');
         }
 
-        // Cria um handle para o arquivo json de banco de dados
-        getJsonDatabase((err: any, jsonDatabase: any) => {
-            if (err) {
-                return res.status(500).send('Erro ao ler o arquivo JSON de usuários.');
-            }
+        const user = context.userRepository.getByEmail(claims._email)
+        if (user.email != claims._email) {
+            return res.status(401).send('Usuário não autenticado.');
+        }
+        //const user = jsonDatabase.find((user: { id: any }) => user.id === claims._id);
+        //if (!user) {
+        //    return res.status(401).send('Usuário não autenticado.');
+        //}
 
-            // Busca o usuário pelo id
-            const user = jsonDatabase.find((user: { id: any }) => user.id === claims._id);
-            if (!user) {
-                return res.status(401).send('Usuário não autenticado.');
-            }
-
-            req.user = user;
-            next();
-        });
-
+        req.user = user;
+        next();
     }
     catch (error) {
         return res.status(401).send('Usuário não autenticado.');
