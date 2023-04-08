@@ -21,6 +21,7 @@ Scenario: Register new User with an invalid email
     And I write "Pedro Basilio" in "Name"
     And I write "pcsb" in "email"
     And I write "pcsb01" in "Password"
+    And I click on "Enviar"
     Then I get a Registration Error message "Por favor colocar um dado válido"
     And I see the "Email" field highlighted
 
@@ -31,6 +32,7 @@ Scenario: Register new User with password less than 6 digits
     And I write "Drielle" in "Name"
     And I write "drielle@cin.ufpe.br" in "email"
     And I write "dri01" in "Password"
+    And I click on "Enviar"
     Then I get a Registration Error message "Por favor colocar um dado válido"
     And I see the "Senha" field highlighted
 
@@ -77,6 +79,23 @@ Scenario: User logged in wants to change his password
     And I write "01pcsb" in "Nova Senha"
     And I click on "Alterar"
     Then I see a password changed successfully message
+
+Scenario: User logged in wants to change his password to a less than 6 digits password
+    Given I am on the "Editar Perfil" page
+    And I am logged in with user "pcsb" and password "pcsb01"
+    When I click on "Alterar Senha" option
+    And I write "01pcsb" in "Nova Senha"
+    And I click on "Alterar"
+    Then I get a Registration Error message "Por favor colocar um dado válido"
+    And I see the "Nova Senha" field highlighted
+
+Scenario: User logged in wants to change his password without password
+    Given I am on the "Editar Perfil" page
+    And I am logged in with user "pcsb" and password "pcsb01"
+    When I click on "Alterar Senha" option
+    And I click on "Alterar"
+    Then I get a Registration Error message "Por favor colocar um dado válido"
+    And I see the "Nova Senha" field highlighted
 
 Scenario: Logged in user wants to delete his account
     Given I am on the "Editar Perfil" page
