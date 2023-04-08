@@ -34,7 +34,43 @@ Scenario: Register new User with password less than 6 digits
     Then I get a Registration Error message "Por favor colocar um dado válido"
     And I see the "Senha" field highlighted
 
-    Scenario: User logged in wants to change his password
+Scenario: Registering new users without user
+    Given I am on the "Registro de novo usuário" page
+    When I write "Pedro Basilio" in "Nome"
+    And I write "pcsb01" in "Senha"
+    And I write "pcsb@cin.ufpe.br" in "Email"
+    And I click on "Enviar"
+    Then I get a Registration Error message "Por favor colocar um dado válido"
+    And I see the "Usuario" field highlighted
+
+Scenario: Registering new users without email
+    Given I am on the "Registro de novo usuário" page
+    When I write "pcsb" in "Usuário"
+    And I write "Pedro Basilio" in "Nome"
+    And I write "pcsb01" in "Senha"
+    And I click on "Enviar"
+    Then I get a Registration Error message "Por favor colocar um dado válido"
+    And I see the "Email" field highlighted
+
+Scenario: Registering new users without password
+    Given I am on the "Registro de novo usuário" page
+    When I write "pcsb" in "Usuário"
+    And I write "Pedro Basilio" in "Nome"
+    And I write "pcsb@cin.ufpe.br" in "Email"
+    And I click on "Enviar"
+    Then I get a Registration Error message "Por favor colocar um dado válido"
+    And I see the "Senha" field highlighted
+
+Scenario: Registering new users without name
+    Given I am on the "Registro de novo usuário" page
+    When I write "pcsb" in "Usuário"
+    And I write "pcsb01" in "Senha"
+    And I write "pcsb@cin.ufpe.br" in "Email"
+    And I click on "Enviar"
+    Then I get a Registration Error message "Por favor colocar um dado válido"
+    And I see the "Nome" field highlighted
+
+Scenario: User logged in wants to change his password
     Given I am on the "Editar Perfil" page
     And I am logged in with user "pcsb" and password "pcsb01"
     When I click on "Alterar Senha" option
