@@ -250,3 +250,23 @@ Scenario: Administrator wants to edit a user role without selecting a role
     When I click on the "Ativar" button on the "Usuario" user "pcsb" line
     And I click "Atualizar"
     Then I get a Error message "Por favor, selecione um cargo!"
+
+Scenario: Administrator wants to edit a User from the system
+    Given I am logged in with an "admin" account with email "admin@dizer.com" and password "admin"
+    And I'm on the "Lista de Usuários" page
+    And I see a list of system users with "3" users
+    When I click on the "Adicionar Usuario" button
+    And I write "pcsb" at "Usuário" field
+    And I write "Pedro Costa" at "Nome" field
+    And I write "pcsb02" at "Senha" field
+    And I write "pcsb2@cin.ufpe.br" at "Email" field
+    And I select "Usuario" at "Tipo de Usuario" field
+    And I select the checkbox of "Ativo" field
+    And I click "Adicionar"
+    Then I see a success message "Usuário cadastrado com sucesso"
+    And I see a list of system users with "4" users
+    And I see the "Usuario" user "pcsb"
+    And I see the "email" user "pcsb2@cin.ufpe.br"
+    And I see the "Nome" user "Pedro Costa"
+    And I see the "Cargo" user "Usuario"
+    And I see the "Ativo" user field checked
