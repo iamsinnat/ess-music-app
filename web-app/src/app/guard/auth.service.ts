@@ -1,51 +1,52 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
-import { decode, verify, JwtPayload } from 'jsonwebtoken';//import { context } from '../../../../server'
+import { HttpClient } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
+    private apiURL = 'http://localhost:3000/api';
+    private jwtHelper = new JwtHelperService();
 
-    constructor(private cookieService: CookieService) { }
+    constructor(private http: HttpClient, private router: Router) { }
 
-    getJwtFromCookie(): string {
-        return this.cookieService.get('jwt');
+    public async login(email: string, password: string) {
+        try {
+            const result = await this.http.post<any>(`${this.apiURL}/login`, { email: email, password: password }).toPromise();
+            if (result && result.token) {
+                localStorage.setItem('jwt', result.token);
+                const decodedToken = this.jwtHelper.decodeToken(result.token);
+                localStorage.setItem('user', JSON.stringify(decodedToken.user));
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
     }
 
-    validateJwt(jwtToken: string): boolean {
-        try {
-            // Verifica se o token está no formato correto
-            const decodedToken = decode(jwtToken);
-            if (!decodedToken || typeof decodedToken !== 'object') {
-                return false;
-            }
+    public isLoggedIn() {
+        const token = localStorage.getItem('jwt');
+        return !this.jwtHelper.isTokenExpired(token);
+    }
 
-            // Verifica se o token é válido
-            const secret = 'my_secret_key'; // substituir pela chave secreta real
-            const verifiedToken = verify(jwtToken, secret) as JwtPayload;
-            if (!verifiedToken || typeof verifiedToken !== 'object') {
-                return false;
-            }
+    public logout() {
+        localStorage.removeItem('jwt');
+        localStorage.removeItem('user');
+        this.router.navigate(['/login']);
+    }
 
-            // Verifica se o token não expirou
-            const currentTime = Date.now() / 1000; // convertendo para segundos
-            if (verifiedToken.exp && verifiedToken.exp <= currentTime) {
-                return false;
-            }
-
-            /*const user = context.userRepository.getByEmail(verifiedToken['_email'])
-            // Verifica se o token contém as informações corretas do usuário
-            if (user.email != verifiedToken['_email']) {
-                return false;
-            }
-            */
-            // Se todas as verificações passarem, o token é válido
-            return true;
-
-        } catch (err) {
-            // Se ocorrer algum erro durante a verificação, o token é inválido
-            return false;
+    public getUserRole() {
+        const token = localStorage.getItem('jwt');
+        if (token) {
+            const decodedToken = this.jwtHelper.decodeToken(token);
+            return decodedToken.role;
+        } else {
+            return null;
         }
     }
 }
