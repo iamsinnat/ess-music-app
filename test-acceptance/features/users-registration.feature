@@ -109,7 +109,29 @@ Scenario: Administrator wants to remove a User from the system
     Given I am logged in with an "admin" account with email "admin@dizer.com" and password "admin"
     And I'm on the "Lista de Usuários" page
     And I see a list of system users
-    And I see the "e-mail" user "pcsb@cin.ufpe.br"
-    When I click on the "Remover" button on the "e-mail" user "pcsb@cin.ufpe.br"
+    And I see the "email" user "pcsb@cin.ufpe.br"
+    When I click on the "Remover" button on the "e-mail" user "pcsb@cin.ufpe.br" line
     And I click "Sim"
     Then I check that the "e-mail" user "pcsb@cin.ufpe.br" is no longer on the list of system users
+
+Scenario: Administrator wants to edit a User from the system
+    Given I am logged in with an "admin" account with email "admin@dizer.com" and password "admin"
+    And I'm on the "Lista de Usuários" page
+    And I see a list of system users
+    And I see the "Usuario" user "pcsb"
+    And I see the "email" user "pcsb@cin.ufpe.br"
+    And I see the "Nome" user "Pedro Basilio"
+    And I see the "Cargo" user "Usuario"
+    And I see the "Ativo" user field checked
+    When I click on the "Editar" button on the "Usuario" user "pcsb" line
+    And I write "Pedro Costa" at "Nome" field
+    And I write "pcsb02" at "Senha" field
+    And I write "pcsb2@cin.ufpe.br" at "Email" field
+    And I click "Atualizar"
+    Then I see a success message "Informação alterada com sucesso!"
+    And I see a list of system users
+    And I see the "Usuario" user "pcsb"
+    And I see the "email" user "pcsb2@cin.ufpe.br"
+    And I see the "Nome" user "Pedro Costa"
+    And I see the "Cargo" user "Usuario"
+    And I see the "Ativo" user field checked
