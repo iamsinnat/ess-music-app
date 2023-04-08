@@ -15,7 +15,26 @@ Scenario: Registering new users
     And I click on "Enviar"
     Then I see a registration completed message
 
-Scenario: User logged in wants to change his password
+Scenario: Register new User with an invalid email
+    Given I am on the "Registro de novo usuário" page
+    When I write "pcsb" in "Usuário"
+    And I write "Pedro Basilio" in "Name"
+    And I write "pcsb" in "email"
+    And I write "pcsb01" in "Password"
+    Then I get a Registration Error message "Por favor colocar um dado válido"
+    And I see the "Email" field highlighted
+
+
+Scenario: Register new User with password less than 6 digits
+    Given I am on the "Registro de novo usuário" page
+    When I write "dri" in "Usuário"
+    And I write "Drielle" in "Name"
+    And I write "drielle@cin.ufpe.br" in "email"
+    And I write "dri01" in "Password"
+    Then I get a Registration Error message "Por favor colocar um dado válido"
+    And I see the "Senha" field highlighted
+
+    Scenario: User logged in wants to change his password
     Given I am on the "Editar Perfil" page
     And I am logged in with user "pcsb" and password "pcsb01"
     When I click on "Alterar Senha" option
@@ -39,22 +58,3 @@ Scenario: Administrator wants to remove a User from the system
     When I click on the "Remover" button on the "e-mail" user "pcsb@cin.ufpe.br"
     And I click "Sim"
     Then I check that the "e-mail" user "pcsb@cin.ufpe.br" is no longer on the list of system users
-
-Scenario: Register new User with an invalid email
-    Given I am on the "Registro de novo usuário" page
-    When I write "pcsb" in "Usuário"
-    And I write "Pedro Basilio" in "Name"
-    And I write "pcsb" in "email"
-    And I write "pcsb01" in "Password"
-    Then I get a Registration Error message "Por favor colocar um dado válido"
-    And I see the "Email" field highlighted
-
-
-Scenario: Register new User with password less than 6 digits
-    Given I am on the "Registro de novo usuário" page
-    When I write "dri" in "Usuário"
-    And I write "Drielle" in "Name"
-    And I write "drielle@cin.ufpe.br" in "email"
-    And I write "dri01" in "Password"
-    Then I get a Registration Error message "Por favor colocar um dado válido"
-    And I see the "Senha" field highlighted
