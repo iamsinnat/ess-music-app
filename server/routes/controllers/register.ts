@@ -4,10 +4,10 @@ import * as uuid from 'uuid';
 import { User } from 'music-app-models';
 import { context } from '../../server';
 
-export const registerUser = async (req: Request, res: Response) => {
-    if(req.body.password === undefined || req.body.password == '' || req.body.password === null)
+export const register = async (req: Request, res: Response) => {
+    if (req.body.password === undefined || req.body.password == '' || req.body.password === null)
         return res.status(400).send('Senha vazia.');
-    
+
     const hashedPassword = await hashPassword(req.body.password)
     const username = req.body.name
     const email = req.body.email
@@ -25,8 +25,8 @@ export const registerUser = async (req: Request, res: Response) => {
         senha: password
     }
 
-    if(context.userRepository.add(newUser))
+    if (context.userRepository.add(newUser))
         return res.status(200).send('Registro bem sucedido');
-    
+
     return res.status(400).send('Usuário já existente');
 }

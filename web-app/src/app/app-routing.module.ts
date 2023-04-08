@@ -23,23 +23,23 @@ import { AlbumAdminComponent } from './album-admin/album-admin.component';
 
 
 const routes: Routes = [
-  {path:'', component:HomeComponent},
-  {path:'register', component:RegisterComponent},
-  {path:'login', component:LoginComponent},
-  {path:'lista-usuarios', component:UserlistingComponent, canActivate:[AuthGuard]},
-  {path: 'cadastrar-musicas', component: MusicasComponent, canActivate:[AuthGuard]},
-  {path: 'lista-musicas', component: ListaMusicasComponent, canActivate:[AuthGuard]},
-  {path: 'initial-page', component: InitialPageComponent, canActivate:[AuthGuard]},
-  {path: 'userAdmin', component: UserAdminComponent, canActivate:[AuthGuard]},
-  {path: 'user', component: UserComponent, canActivate:[AuthGuard]},
-  {path: 'artista', component: ArtistaComponent, canActivate:[AuthGuard]},
-  {path: 'userEdit', component: UserEditComponent, canActivate:[AuthGuard]},
-  {path: 'playlistUser', component: PlaylistUserComponent},
-  {path: 'playlistCategoria', component: PlaylistCategoriaComponent},
-  {path: 'playlistSeguida', component: PlaylistSeguidaComponent},
-  {path: 'artistaAdmin', component: ArtistaAdminComponent},
-  {path: 'album', component: AlbumComponent},
-  {path: 'albumAdmin', component: AlbumAdminComponent}
+  { path: '', component: HomeComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'lista-usuarios', component: UserlistingComponent, /*canActivate:[AuthGuard]*/ },
+  { path: 'cadastrar-musicas', component: MusicasComponent, /*canActivate:[AuthGuard]*/ },
+  { path: 'lista-musicas', component: ListaMusicasComponent, /*canActivate:[AuthGuard]*/ },
+  { path: 'initial-page', component: InitialPageComponent, /*canActivate:[AuthGuard]*/ },
+  { path: 'userAdmin', component: UserAdminComponent, /*canActivate:[AuthGuard]*/ },
+  { path: 'user', component: UserComponent, /*canActivate:[AuthGuard]*/ },
+  { path: 'artista', component: ArtistaComponent, /*canActivate:[AuthGuard]*/ },
+  { path: 'userEdit', component: UserEditComponent, /*canActivate:[AuthGuard]*/ },
+  { path: 'playlistUser', component: PlaylistUserComponent },
+  { path: 'playlistCategoria', component: PlaylistCategoriaComponent },
+  { path: 'playlistSeguida', component: PlaylistSeguidaComponent },
+  { path: 'artistaAdmin', component: ArtistaAdminComponent },
+  { path: 'album', component: AlbumComponent },
+  { path: 'albumAdmin', component: AlbumAdminComponent }
 ];
 
 @NgModule({
