@@ -229,6 +229,7 @@ Scenario: Administrator wants to edit a user role
     And I see the "Ativo" user field checked
     When I click on the "Ativar" button on the "Usuario" user "pcsb" line
     And I select the "Admin" option of "Cargo" field
+    And I click "Atualizar"
     Then I see a success message "Informação alterada com sucesso!"
     And I see a list of system users
     And I see the "Usuario" user "pcsb"
@@ -236,3 +237,16 @@ Scenario: Administrator wants to edit a user role
     And I see the "Nome" user "Pedro Costa"
     And I see the "Cargo" user "Admin"
     And I see the "Ativo" user field checked
+
+Scenario: Administrator wants to edit a user role without selecting a role
+    Given I am logged in with an "admin" account with email "admin@dizer.com" and password "admin"
+    And I'm on the "Lista de Usuários" page
+    And I see a list of system users
+    And I see the "Usuario" user "pcsb"
+    And I see the "email" user "pcsb@cin.ufpe.br"
+    And I see the "Nome" user "Pedro Basilio"
+    And I see the "Cargo" user "Usuario"
+    And I see the "Ativo" user field checked
+    When I click on the "Ativar" button on the "Usuario" user "pcsb" line
+    And I click "Atualizar"
+    Then I get a Error message "Por favor, selecione um cargo!"
