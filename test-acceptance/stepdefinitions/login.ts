@@ -57,8 +57,8 @@ async function criarUsuario(id, name, password, email) {
     await element(by.buttonText('Enviar')).click();
 }
 
-export function getSessionStorageItem(key: string) {
-    return browser.executeScript(`return sessionStorage.getItem('${key}');`);
+export function getLocalStorageItem(key: string) {
+    return browser.executeScript(`return localStorage.getItem('${key}');`);
 }
 
 defineSupportCode(function ({ Given, When, Then }) {
@@ -112,12 +112,12 @@ defineSupportCode(function ({ Given, When, Then }) {
     })
 
     Then(/^eu vejo que estou logado com o usuário "([^\"]*)"$/, async (username) => {
-        const actualLoggedInUser = await getSessionStorageItem("username");
+        const actualLoggedInUser = await getLocalStorageItem("username");
         expect(actualLoggedInUser).to.equal(<string>username);
     })
 
     Then(/^eu vejo que estou logado com permissões de "([^\"]*)"$/, async (role) => {
-        const actualUserRole = await getSessionStorageItem("userrole");
+        const actualUserRole = await getLocalStorageItem("userrole");
         expect(actualUserRole).to.equal(<string>role);
     })
 

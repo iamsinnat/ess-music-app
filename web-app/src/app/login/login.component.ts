@@ -19,7 +19,7 @@ export class LoginComponent {
     private service: AuthService,
     private router: Router
   ) {
-    sessionStorage.clear();
+    //localStorage.clear();
   }
 
   userdata: any;
@@ -43,8 +43,8 @@ export class LoginComponent {
           if (validPassword) {
             // Se o usuário tiver permissão para entrar:
             if (this.userdata.isactive) {
-              sessionStorage.setItem('username', this.userdata.id);
-              sessionStorage.setItem('userrole', this.userdata.role);
+              localStorage.setItem('username', this.userdata.id);
+              localStorage.setItem('userrole', this.userdata.role);
               this.router.navigate(['/initial-page']);
             } else {
               this.toastr.error('Por favor, renove seu cadastro na Dizer ou contate nosso suporte');

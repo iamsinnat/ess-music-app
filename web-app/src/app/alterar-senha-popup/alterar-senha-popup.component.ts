@@ -21,7 +21,7 @@ export class AlterarSenhaPopupComponent {
 
 
   ngOnInit(): void {
-    this.user = this.service.GetbyCode(sessionStorage.getItem('username')).subscribe(res => {
+    this.user = this.service.GetbyCode(localStorage.getItem('username')).subscribe(res => {
       this.user = res;
       this.registerform.setValue({
         id: this.user.id, name: this.user.name, email: this.user.email,

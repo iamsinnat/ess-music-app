@@ -37,11 +37,11 @@ export class AuthService {
 
   // Saber se o usuário está logado
   IsloggedIn(): boolean {
-    return sessionStorage.getItem('username') !== null;
+    return localStorage.getItem('username') !== null;
   }
 
   GetUserRole(): string {
-    return sessionStorage.getItem('userrole')?.toString() || '';
+    return localStorage.getItem('userrole')?.toString() || '';
   }
 
   deletarUsuario(code: any) {
