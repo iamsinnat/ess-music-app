@@ -33,24 +33,34 @@ export class LoginComponent {
   proceedlogin() {
     // Login com sucesso
     if (this.loginform.valid) {
-      this.subscription.add(this.service.GetbyCode(this.loginform.value.username).subscribe((res: any) => {
-        this.userdata = res;
-        //console.log(this.userdata);
-        // Se acertar a senha:
-        const validPassword = bcrypt.compareSync(this.loginform.value.password ?? '', this.userdata.password);
-        if (validPassword) {
-          // Se o usuário tiver permissão para entrar:
-          if (this.userdata.isactive) {
-            sessionStorage.setItem('username', this.userdata.id);
-            sessionStorage.setItem('userrole', this.userdata.role);
-            this.router.navigate(['/initial-page']);
+      this.subscription.add(this.service.GetbyCode(this.loginform.value.username).subscribe(
+        (res: any) => {
+          this.userdata = res;
+          //console.log(this.userdata);
+
+          // Se acertar a senha:
+          const validPassword = bcrypt.compareSync(this.loginform.value.password ?? '', this.userdata.password);
+          if (validPassword) {
+            // Se o usuário tiver permissão para entrar:
+            if (this.userdata.isactive) {
+              sessionStorage.setItem('username', this.userdata.id);
+              sessionStorage.setItem('userrole', this.userdata.role);
+              this.router.navigate(['/initial-page']);
+            } else {
+              this.toastr.error('Por favor, renove seu cadastro na Dizer ou contate nosso suporte');
+            }
           } else {
-            this.toastr.error('Por favor, renove seu cadastro na Dizer ou contate nosso suporte');
+            this.toastr.error('Credênciais Inválidas ou Usuário não existente');
           }
-        } else {
-          this.toastr.error('Credenciais Inválidas');
+        },
+        (error) => {
+          if (error.status === 404) {
+            this.toastr.error('Credênciais Inválidas ou Usuário não existente');
+          } else {
+            console.error(error);
+          }
         }
-      }));
+      ));
     }
   }
 
