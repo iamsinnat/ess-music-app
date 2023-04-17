@@ -37,6 +37,7 @@ export class PlaylistAdminComponent {
       this.musicas = this.playlist.musicas
       this.service.GetbyCode(localStorage.getItem('username')).subscribe(res => {
         this.isDonoPlaylist = JSON.stringify(playlist.usuario_dono) === JSON.stringify(res)
+        this.user = res
       });
       
       if (this.playlist.seguidores.find(u => u.id === this.user.id)) {

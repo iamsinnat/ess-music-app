@@ -10,14 +10,14 @@ export let config: Config = {
 
     capabilities: {
         // browserName: 'chrome'
-        browserName: 'firefox' // para rodar no grad
+        browserName: 'chrome' // para rodar no grad
     },
 
     framework: 'custom',
     frameworkPath: require.resolve('protractor-cucumber-framework'),
 
     specs: [
-        '../../features/teste.feature'
+        '../../features/*.feature'
     ],
 
     onPrepare: () => {
@@ -30,6 +30,6 @@ export let config: Config = {
         compiler: "ts:ts-node/register",
         strict: true,
         format: ['pretty'],
-        require: ['../../stepdefinitions/register.ts'],
+        require: ['../../stepdefinitions/*.ts'],
     }
 };

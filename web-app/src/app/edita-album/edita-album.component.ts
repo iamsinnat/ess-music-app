@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MusicaService } from '../musicas/musicas.service';
 import { HttpClient } from '@angular/common/http';
 import { CadastraAlbumService } from '../cadastra-album/cadastra-album.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edita-album',
@@ -22,7 +23,8 @@ export class EditaAlbumComponent {
     private route: ActivatedRoute,
     private musicaService: MusicaService,
     private http: HttpClient,
-    private albumService: CadastraAlbumService
+    private albumService: CadastraAlbumService,
+    private toastr: ToastrService
   ) {}
 
 
@@ -37,10 +39,19 @@ export class EditaAlbumComponent {
   }
 
   editarAlbum(album: Album) {
-    const novoTitulo = (<HTMLInputElement>document.getElementById("album-titulo")).value;
-    const novoAlbum = (<HTMLInputElement>document.getElementById("album-url")).value;
-    const novoAno = (<HTMLInputElement>document.getElementById("album-ano")).value;
-  
+    const novoTitulo = (<HTMLInputElement>document.getElementById("album-nome")).value;
+    const novoAlbum = (<HTMLInputElement>document.getElementById("album-url_foto_album")).value;
+    const novoAno = (<HTMLInputElement>document.getElementById("album-ano_lancamento")).value;
+    
+    if(
+      novoTitulo == "" ||
+      novoAlbum == "" ||
+      novoAno == ""
+    ){
+      this.toastr.error('Campo inválido!');
+      return;
+    }
+
     // Requisição PUT para atualizar o álbum
     this.http.put(this.taURL + "/albums/" + String(album.id), {
       nome: novoTitulo || album.nome,
@@ -50,7 +61,8 @@ export class EditaAlbumComponent {
       ano_lancamento: novoAno || album.ano_lancamento
     }).subscribe(() => {
       console.log('Álbum atualizado com sucesso!');
-  
+      this.toastr.success('Álbum alterado!');
+
       // Requisição GET para buscar todas as músicas do álbum
       this.http.get<any>(this.taURL + "/musicas/?albumId=" + String(album.id))
         .subscribe((musicas: Musica[]) => {
@@ -69,9 +81,11 @@ export class EditaAlbumComponent {
               console.error('Ocorreu um erro ao atualizar o título da música:', error);
             });
           });
-  
-          // Redirecionamento para a página de detalhes do álbum
-          window.location.href = "/visualizar-artistas-admin";
+          
+          setTimeout(() =>{
+            // Redirecionamento para a página de detalhes do álbum
+            window.location.href = "/visualizar-artistas-admin";
+          }, 2000);
         }, (error) => {
           console.error('Ocorreu um erro ao buscar as músicas do álbum:', error);
         });

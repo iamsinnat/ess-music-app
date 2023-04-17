@@ -3,14 +3,12 @@ Feature: CRUD de artista
     Quero cadastrar, alterar e remover artistas
     Para cadastrar álbuns e músicas
 
-
-Scenario: Cadastrando artista
+Scenario: Cadastrando artista com sucesso
     Given Estou logado como o usuário Administrador de email "admin@dizer.com" e senha "admin"
     And Estou na página de "Cadastrar novo artista"
     When Preencho os campos "nome do artista", "gênero musical" e "url_foto" com os valores "Bruno Miranda", "Pop music" e "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     And Clico em "Adicionar"
     Then O sistema mostra uma mensagem de "Artista cadastrado!"
-
 
 Scenario: Cadastrando artista com nome vazio
     Given Estou logado como o usuário Administrador de email "admin@dizer.com" e senha "admin"

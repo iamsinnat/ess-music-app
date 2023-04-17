@@ -14,7 +14,7 @@
     {
       "id": "pcsb",
       "name": "Pedro Basilio",
-      "password": "$2a$10$JbqntgKTYwz.WRgzrOsCueYcokImwy1SQ2XusSBW1BnXoutZIWnHe",
+      "password": "$2a$10$.veD0B9bjcwAa0QVi07PyeVYbNN6B8urvzcjM1Z4PKYvHkcgsV9YS",
       "email": "pcsb@cin.ufpe.br",
       "role": "user",
       "isactive": true,
@@ -77,12 +77,13 @@
       "password": "$2a$10$Q.5/gqHD/rN1gR4Trs0qjec5K7tctSHettD80DWA4ncf97qN0bGWK",
       "email": "pcsb@cpasodkfpoaskf",
       "role": "user",
-      "isactive": true
+      "isactive": true,
+      "historico": []
     },
     {
       "id": "floquinho",
       "name": "floquinho",
-      "password": "$2a$10$S32KHiJTwedUCrPJQv9a5.MoyOrW0lGCoD.eG9X143Ziy/Z1IPTny",
+      "password": "floquinho",
       "email": "floquinho@floquinho.com",
       "role": "user",
       "isactive": true
@@ -94,6 +95,15 @@
       "email": "eliabinho@eliabinho.com",
       "role": "admin",
       "isactive": true
+    },
+    {
+      "id": "petiano",
+      "name": "petiano",
+      "password": "$2a$10$Q4MBqKkPdoeLuuDmCXpotOUCIrjQRMImDgecjafD/mk16Y/pEm6Ay",
+      "email": "petiano@petiano.com",
+      "role": "user",
+      "isactive": true,
+      "historic": []
     }
   ],
   "role": [
@@ -3543,6 +3553,24 @@
         "email": "eliabinho@eliabinho.com",
         "role": "user",
         "isactive": true
+      },
+      "musicas": [],
+      "seguidores": []
+    },
+    {
+      "id": 4,
+      "titulo": "petiano petiano",
+      "privacidade": "Pública",
+      "categoria": "Hip-Hop/rap",
+      "url_foto_playlist": "https://res.cloudinary.com/dkbuneg9h/image/upload/v1665717923/opei-2022/OPEI_2022_LOGO.svg",
+      "usuario_dono": {
+        "id": "petiano",
+        "name": "petiano",
+        "password": "$2a$10$Q4MBqKkPdoeLuuDmCXpotOUCIrjQRMImDgecjafD/mk16Y/pEm6Ay",
+        "email": "petiano@petiano.com",
+        "role": "user",
+        "isactive": true,
+        "historic": []
       },
       "musicas": [],
       "seguidores": []
