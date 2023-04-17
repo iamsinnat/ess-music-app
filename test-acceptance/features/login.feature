@@ -4,8 +4,7 @@
 Feature: Login
     As um usuário cadastrado na aplicação
     I want to inserir minhas credênciais de acesso e enviá-las para o servidor de forma segura
-    So that eu consiga acessar todas as features internas apenas cabíveis ao meu nível de acesso e ao meu usuário particular, as quais são apenas acessiveis após
-    um processo de autenticação bem sucedido
+    So that eu consiga acessar todas as features internas apenas cabíveis ao meu nível de acesso e ao meu usuário particular, as quais são apenas acessiveis após um processo de autenticação bem sucedido
 
 Scenario: Acesso ao Initial-Page sem realizar um login bem sucedido na aplicação
     Given eu estou na página "login" da aplicação
